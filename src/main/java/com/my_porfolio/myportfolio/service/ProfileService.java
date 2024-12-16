@@ -6,4 +6,7 @@ public interface ProfileService {
      Profile saveProfile(Profile profile);
      Profile getProfile(String id);
 
+     Profile findById(String id);
+
+     Profile findByName(String name);
 }

@@ -23,4 +23,14 @@ public class ProfileServiceImpl implements ProfileService{
         return profileRepository.findById(id).orElse( null);
 
     }
+
+    @Override
+    public Profile findById(String id) {
+        return profileRepository.findById(id).orElseThrow(()-> new RuntimeException("not found"));
+    }
+
+    @Override
+    public Profile findByName(String name) {
+        return profileRepository.findFirstByName(name).orElseThrow(()-> new RuntimeException("not found"));
+    }
 }
