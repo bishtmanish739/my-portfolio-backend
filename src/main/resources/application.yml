@@ -2,8 +2,9 @@ spring:
   application:
     name: myportfolio
   data:
-    host: localhost
-    port: 27017
-    database: myportfolio
+    mongodb:
+      host: localhost
+      port: 27017
+      database: myportfolio
 server:
   port: 8081
