@@ -1,9 +1,5 @@
 package com.my_porfolio.myportfolio.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -14,15 +10,16 @@ import java.util.List;
 public class Profile implements Serializable {
     @Id
     private String id;
+
     private String name;
     private int age;
 
-   private String location;
-   private Contact contact;
-   private Skill skills;
-   private List<WorkExperience> workExperiences;
-private String profileSummery;
-private String profileHeadline;
+    private String location;
+    private Contact contact;
+    private Skill skills;
+    private List<WorkExperience> workExperiences;
+    private String profileSummery;
+    private String profileHeadline;
 
     public String getId() {
         return id;
