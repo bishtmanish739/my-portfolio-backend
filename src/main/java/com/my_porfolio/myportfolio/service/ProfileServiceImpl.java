@@ -9,10 +9,15 @@ import org.springframework.stereotype.Service;
 public class ProfileServiceImpl implements ProfileService{
     @Autowired
     ProfileRepository profileRepository;
+
+    @Autowired
+    RedisService redisService;
     @Override
     public Profile saveProfile(Profile profile) {
         try {
-            return  profileRepository.save(profile);
+            Profile p=  profileRepository.save(profile);
+            redisService.setValue(profile.getId(),p,20000L);
+            return p;
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -20,7 +25,18 @@ public class ProfileServiceImpl implements ProfileService{
 
     @Override
     public Profile getProfile(String id) {
-        return profileRepository.findById(id).orElse( null);
+       Profile p= redisService.getValue(id,Profile.class);
+       if(p!=null){
+           return  p;
+       }
+        p= profileRepository.findById(id).orElse( null);
+        if(p!=null){
+            redisService.setValue(p.getId(),p,2000L);
+
+        }
+
+        return p;
+
 
     }
 

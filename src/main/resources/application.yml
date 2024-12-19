@@ -5,5 +5,10 @@ spring:
     mongodb:
       uri: mongodb+srv://qualitygroups24:vUywKrmgc3bQfkC4@myportfolio.xqwjz.mongodb.net/?retryWrites=true&w=majority&appName=myportfolio
       database: myportfolio
+
+    redis:
+     host: redis-18801.c301.ap-south-1-1.ec2.redns.redis-cloud.com
+     port: 18801
+     password: aHIWLqM1dWkovUJb7tmwFjeGxGWUXnkr
 server:
   port: 8081

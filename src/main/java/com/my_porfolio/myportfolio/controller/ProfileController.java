@@ -20,7 +20,7 @@ public class ProfileController {
     @GetMapping("/{id}")
     ResponseEntity<Profile> getProfileById(@PathVariable String id){
         log.debug("id is:{}",id);
-        return ResponseEntity.ok(profileService.findById(id));
+        return ResponseEntity.ok(profileService.getProfile(id));
     }
     @GetMapping("")
     ResponseEntity<Profile> getProfileByName(@RequestParam String name){
