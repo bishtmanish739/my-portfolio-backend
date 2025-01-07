@@ -7,8 +7,38 @@ spring:
       database: myportfolio
 
     redis:
-     host: redis-18801.c301.ap-south-1-1.ec2.redns.redis-cloud.com
-     port: 18801
-     password: aHIWLqM1dWkovUJb7tmwFjeGxGWUXnkr
+      host: redis-18801.c301.ap-south-1-1.ec2.redns.redis-cloud.com
+      port: 18801
+      password: aHIWLqM1dWkovUJb7tmwFjeGxGWUXnkr
 server:
   port: 8081
+logging:
+  level:
+    root: INFO
+
+
+management:
+  health:
+    circuitbreakers:
+      enabled: true
+  endpoints:
+     web:
+      exposure:
+        include: health
+  endpoint:
+    health:
+      show-details: always
+
+resilience4j:
+  circuitbreaker:
+    instances:
+      circuitBreakerTest:
+        registerHealthIndicator: true
+        slidingWindowSize: 5
+        minimumNumberOfCalls: 5
+        failureRateThreshold: 50
+        waitDurationInOpenState: 10s
+        permittedNumberOfCallsInHalfOpenState: 3
+        eventConsumerBufferSize: 10
+
+

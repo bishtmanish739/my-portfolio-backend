@@ -9,4 +9,8 @@ public interface ProfileService {
      Profile findById(String id);
 
      Profile findByName(String name);
+
+     Profile updateProfile(Profile profile);
+
+     String testCircuitBreaker();
 }

@@ -5,6 +5,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Map;
 
 @Document(collection = "profiles")
 public class Profile implements Serializable {
@@ -20,6 +21,25 @@ public class Profile implements Serializable {
     private List<WorkExperience> workExperiences;
     private String profileSummery;
     private String profileHeadline;
+    private String aboutSection;
+
+    private Map<String,Object> otherInfo;
+
+    public Map<String, Object> getOtherInfo() {
+        return otherInfo;
+    }
+
+    public void setOtherInfo(Map<String, Object> otherInfo) {
+        this.otherInfo = otherInfo;
+    }
+
+    public String getAboutSection() {
+        return aboutSection;
+    }
+
+    public void setAboutSection(String aboutSection) {
+        this.aboutSection = aboutSection;
+    }
 
     public String getId() {
         return id;
@@ -105,6 +125,8 @@ public class Profile implements Serializable {
                 ", workExperiences=" + workExperiences +
                 ", profileSummery='" + profileSummery + '\'' +
                 ", profileHeadline='" + profileHeadline + '\'' +
+                ", aboutSection='" + aboutSection + '\'' +
+                ", otherInfo=" + otherInfo +
                 '}';
     }
 }

@@ -2,6 +2,7 @@ package com.my_porfolio.myportfolio.service;
 
 import com.my_porfolio.myportfolio.domain.Profile;
 import com.my_porfolio.myportfolio.repository.ProfileRepository;
+import org.apache.coyote.BadRequestException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -48,5 +49,27 @@ public class ProfileServiceImpl implements ProfileService{
     @Override
     public Profile findByName(String name) {
         return profileRepository.findFirstByName(name).orElseThrow(()-> new RuntimeException("not found"));
+    }
+
+    @Override
+    public Profile updateProfile(Profile profile) {
+        try {
+            String id=profile.getId();
+            Profile savedProfile=getProfile(id);
+            if(savedProfile==null){
+                throw new BadRequestException("Profile not found");
+            }
+            Profile p=  profileRepository.save(profile);
+            redisService.setValue(profile.getId(),p,20000L);
+            return p;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
+    public String testCircuitBreaker() {
+
+        return String.valueOf(1/0);
     }
 }

@@ -36,7 +36,7 @@ public class RedisService {
         try {
             ObjectMapper objectMapper=new ObjectMapper();
             String jsonString=objectMapper.writeValueAsString(o);
-        redisTemplate.opsForValue().set(key,jsonString,defaultExpiry, TimeUnit.SECONDS);
+        redisTemplate.opsForValue().set(key,jsonString,defaultExpiry, TimeUnit.DAYS);
 
         log.debug("Value added to redis");
 
